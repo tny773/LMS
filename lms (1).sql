@@ -202,6 +202,26 @@ CREATE TABLE `review` (
   `Review_Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+--dumping data for table review
+--
+INSERT INTO review (Review_ID, Book_ID, Member_ID, Rating, Review_Text, Review_Date) VALUES
+(1, 2, 101, 5, 'Excellent', '2024-06-10'),
+(2, 8, 105, 3, 'Okay', '2023-11-25'),
+(3, 12, 103, 4, 'Good read', '2025-01-15'),
+(4, 17, 108, 2, 'Boring', '2024-03-02'),
+(5, 21, 109, 5, 'Loved it', '2025-04-01'),
+(6, 3, 102, 4, 'Nice', '2023-08-20'),
+(7, 5, 105, 1, 'Disliked', '2024-01-12'),
+(8, 9, 108, 5, 'Awesome', '2023-09-30'),
+(9, 14, 101, 3, 'Okay', '2025-03-10'),
+(10, 18, 103, 2, 'Bad', '2023-12-01'),
+(11, 7, 102, 5, 'Great', '2024-05-06'),
+(12, 6, 109, 4, 'Cool', '2024-10-18'),
+(13, 10, 108, 5, 'Loved it', '2025-02-22'),
+(14, 16, 105, 2, 'Meh', '2023-06-15'),
+(15, 25, 101, 4, 'Informative', '2024-07-03');
+
 -- --------------------------------------------------------
 
 --
