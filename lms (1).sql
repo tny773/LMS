@@ -110,8 +110,21 @@ CREATE TABLE `member` (
   `Books_Issued_Count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+--
+--dumping data for table member
+--
+INSERT INTO member
+VALUES(101, "ALLEN", 9898989898, "Active", 12),
+(102, "ALICE", 9898910121, "Active", 15),
+(103, "BROOKE", 9820202898, "Active", 20),
+(104, "CARINA", 8985090598, "Inactive", 0),
+(105, "CHARLIE", 9898900000, "Active", 14),
+(106, "DAVE", 8878878878, "Inactive", 2),
+(107, "ELICE", 4567112397, "Inactive", 8),
+(108, "POOJA", 9019019019, "Active", 22),
+(109, "ZOYA", 7878787878, "Active", 14);
 
+-- --------------------------------------------------------
 --
 -- Table structure for table `publisher`
 --
