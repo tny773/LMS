@@ -301,6 +301,23 @@ INSERT INTO transaction (Transaction_ID, Member_ID, Book_ID, Account_ID, Issue_D
 ----------------------------------------------------------------------
 
 --
+--new table for keeping track of issued books for fine calculation
+--
+CREATE TABLE `issued_books` (
+  `Issue_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Member_ID` int(11) NOT NULL,
+  `Book_ID` int(11) NOT NULL,
+  `Issue_Date` date NOT NULL,
+  `Due_Date` date NOT NULL,
+  `Return_Date` date DEFAULT NULL,
+  `Fine_Amount` decimal(10,2) DEFAULT 0,
+  PRIMARY KEY (`Issue_ID`)
+);
+-- have not added refrences yet
+
+
+
+--
 -- Indexes for dumped tables
 --
 
