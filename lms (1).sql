@@ -57,6 +57,45 @@ CREATE TABLE `books` (
   `Available_Copies` int(11) DEFAULT NULL CHECK (`Available_Copies` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+--dumping data for table books
+--
+INSERT INTO `books` (`Book_ID`, `Book_Title`, `Subject_ID`, `Publisher_ID`, `Category_ID`, `Purchase_Date`, `Available_Status`, `Total_Copies`, `Available_Copies`) VALUES
+-- Physics (Category: Science = 2)
+(1, 'Fundamentals of Physics', 1, 1, 2, '2022-01-15', 'Available', 10, 7),
+(2, 'Modern Physics Concepts', 1, 3, 2, '2021-09-10', 'Issued', 5, 2),
+(3, 'Applied Physics', 1, 4, 2, '2023-03-20', 'Available', 6, 6),
+(4, 'Physics for Engineers', 1, 5, 2, '2020-07-11', 'Lost', 8, 0),
+(5, 'Introduction to Mechanics', 1, 2, 2, '2022-11-30', 'Available', 4, 3),
+
+-- Computer Science (Category: Technology = 3)
+(6, 'Introduction to Algorithms', 2, 1, 3, '2022-08-05', 'Available', 12, 9),
+(7, 'Computer Networks', 2, 3, 3, '2021-12-22', 'Issued', 7, 4),
+(8, 'Operating Systems', 2, 2, 3, '2023-01-10', 'Available', 6, 6),
+(9, 'Database Systems', 2, 4, 3, '2020-05-17', 'Lost', 5, 0),
+(10, 'Artificial Intelligence', 2, 5, 3, '2023-09-18', 'Available', 9, 8),
+
+-- World History (Category: History = 4)
+(11, 'History of Ancient Civilizations', 3, 2, 4, '2022-04-01', 'Available', 3, 3),
+(12, 'World Wars Explained', 3, 3, 4, '2021-06-19', 'Issued', 6, 2),
+(13, 'Renaissance to Revolution', 3, 1, 4, '2020-10-30', 'Available', 4, 4),
+(14, 'A Global History', 3, 5, 4, '2023-02-25', 'Available', 7, 7),
+(15, 'Historical Turning Points', 3, 4, 4, '2021-11-05', 'Lost', 2, 0),
+
+-- Literature (Category: Fiction = 1)
+(16, 'English Classics', 4, 3, 1, '2023-03-12', 'Available', 5, 5),
+(17, 'Poetry Through Ages', 4, 1, 1, '2022-07-14', 'Available', 4, 4),
+(18, 'Modern Literary Theory', 4, 5, 1, '2021-08-08', 'Issued', 6, 2),
+(19, 'Shakespearean Works', 4, 2, 1, '2020-09-15', 'Lost', 3, 0),
+(20, 'World Literature Anthology', 4, 4, 1, '2022-10-01', 'Available', 7, 6),
+
+-- Fine Arts (Category: Art = 5)
+(21, 'Art History Basics', 5, 1, 5, '2023-01-20', 'Available', 6, 6),
+(22, 'Modern Art Movements', 5, 3, 5, '2022-06-11', 'Available', 5, 5),
+(23, 'Painting Techniques', 5, 5, 5, '2021-05-09', 'Issued', 8, 4),
+(24, 'Sculpture and Form', 5, 2, 5, '2020-03-22', 'Lost', 3, 0),
+(25, 'Visual Arts Exploration', 5, 4, 5, '2023-04-16', 'Available', 4, 4);
+
 -- --------------------------------------------------------
 
 --
