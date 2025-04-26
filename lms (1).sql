@@ -38,6 +38,21 @@ CREATE TABLE `accounts` (
   `Payment_Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- dumping data for table accounts
+--
+INSERT INTO accounts (Account_ID, Member_ID, Payment_Description, Payment_Amount, Payment_Date) VALUES
+(1, 101, 'Late fee for overdue book', 15.00, '2025-03-15'),
+(2, 102, 'Membership renewal', 50.00, '2025-01-10'),
+(3, 103, 'Lost book fine', 120.00, '2025-02-20'),
+(4, 105, 'Damage charge', 30.00, '2025-04-01'),
+(5, 108, 'Late return fine', 10.00, '2025-03-25'),
+(6, 109, 'Membership renewal', 50.00, '2025-02-01'),
+(7, 106, 'Late fee for overdue book', 20.00, '2025-03-05'),
+(8, 107, 'Lost book replacement', 150.00, '2025-02-15'),
+(9, 104, 'Membership cancellation refund', -20.00, '2025-01-30'),
+(10, 103, 'Fine adjustment', -10.00, '2025-04-10');
+
 -- --------------------------------------------------------
 
 --
@@ -263,6 +278,24 @@ CREATE TABLE `transaction` (
   `Status` enum('Issued','Returned','Overdue') DEFAULT 'Issued',
   `Fine_Amount` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+--dumping data for table transaction
+--
+
+INSERT INTO transaction (Transaction_ID, Member_ID, Book_ID, Account_ID, Issue_Date, Due_Date, Return_Date, Status, Fine_Amount) VALUES
+(1, 101, 2, 1, '2025-02-20', '2025-03-01', '2025-03-10', 'Overdue', 15.00),
+(2, 102, 5, 2, '2025-01-01', '2025-01-15', '2025-01-14', 'Returned', 0.00),
+(3, 103, 8, 3, '2025-02-01', '2025-02-10', NULL, 'Issued', 0.00),
+(4, 105, 14, 4, '2025-03-10', '2025-03-20', '2025-03-19', 'Returned', 0.00),
+(5, 108, 21, 5, '2025-03-01', '2025-03-10', '2025-03-20', 'Overdue', 10.00),
+(6, 109, 6, 6, '2025-01-05', '2025-01-20', '2025-01-19', 'Returned', 0.00),
+(7, 106, 11, 7, '2025-02-25', '2025-03-10', '2025-03-15', 'Overdue', 20.00),
+(8, 107, 3, 8, '2025-02-10', '2025-02-20', NULL, 'Issued', 0.00),
+(9, 104, 17, 9, '2025-01-15', '2025-01-25', '2025-01-20', 'Returned', 0.00),
+(10, 103, 1, 10, '2025-04-01', '2025-04-10', '2025-04-09', 'Returned', 0.00);
+
+----------------------------------------------------------------------
 
 --
 -- Indexes for dumped tables
