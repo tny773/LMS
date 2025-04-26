@@ -164,6 +164,9 @@ CREATE TABLE `member` (
   `Books_Issued_Count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+ALTER TABLE member 
+CHANGE COLUMN Member_ID Member_ID INT(11) NOT NULL AUTO_INCREMENT;
+
 --
 --dumping data for table member
 --
