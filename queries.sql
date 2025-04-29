@@ -445,3 +445,9 @@ CREATE TABLE `book_demand` (
     PRIMARY KEY (`Demand_ID`),
     FOREIGN KEY (`Book_ID`) REFERENCES `books`(`Book_ID`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+INSERT INTO book_demand (Book_ID, Demand_Count, Last_Updated)
+VALUES (1, 12, '2025-04-25'),
+    (2, 5, '2025-04-26'),
+    (3, 9, '2025-04-27'),
+    (4, 20, '2025-04-28'),
+    (5, 0, '2025-04-20');
