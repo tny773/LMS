@@ -78,13 +78,14 @@ $activeMembers = $pdo->query("SELECT COUNT(*) FROM member WHERE Status = 'Active
 
     <!-- Admin Actions -->
     <div class="mt-5 text-center">
-        <h3 class="mb-4">Admin Actions ✨</h3>
+    <h3 class="mb-4">Admin Actions ✨</h3>
         <a href="view_books.php" class="btn btn-custom m-2">📚 View Book</a>
+        <a href="book_recommendation.php" class="btn btn-custom m-2">😎 Recommendations </a>
         <a href="add_book.php" class="btn btn-custom m-2">➕ Add Book</a>
         <a href="show_members.php" class="btn btn-custom m-2">👤 View Members</a>
         <a href="add_member.php" class="btn btn-custom m-2">➕ Add Member</a>
         <a href="delete_member.php" class="btn btn-custom m-2">➖ Delete Member</a>
-        <a href="issue_book.php" class="btn btn-custom m-2">📖 Issue Book</a>
+        <a href="issue_book.php" class="btn btn-custom m-2">📖 Issue and Return Book</a>
     </div>
 
     <!-- Recent Books -->
