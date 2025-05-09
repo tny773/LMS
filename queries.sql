@@ -1,12 +1,12 @@
--- Create database
-USE `lms`;
+-- Create and use database
+CREATE DATABASE IF NOT EXISTS lms;
+USE lms;
 -- Table: category
-CREATE TABLE `category` (
-    `Category_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Category_Name` varchar(100) NOT NULL,
-    `Description` text DEFAULT NULL,
-    PRIMARY KEY (`Category_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `category` (
+    `Category_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Category_Name` VARCHAR(100) NOT NULL,
+    `Description` TEXT DEFAULT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 INSERT INTO `category` (`Category_ID`, `Category_Name`, `Description`)
 VALUES (
         1,
@@ -22,11 +22,10 @@ VALUES (
     (4, 'History', 'Historical texts and records.'),
     (5, 'Art', 'Books on art and design.');
 -- Table: publisher
-CREATE TABLE `publisher` (
-    `Publisher_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Publisher_Name` varchar(100) NOT NULL,
-    PRIMARY KEY (`Publisher_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `publisher` (
+    `Publisher_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Publisher_Name` VARCHAR(100) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 INSERT INTO `publisher` (`Publisher_ID`, `Publisher_Name`)
 VALUES (1, 'Pearson'),
     (2, 'McGraw-Hill'),
@@ -34,11 +33,10 @@ VALUES (1, 'Pearson'),
     (4, 'Wiley'),
     (5, 'Springer');
 -- Table: subject
-CREATE TABLE `subject` (
-    `Subject_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Subject_Name` varchar(100) NOT NULL,
-    PRIMARY KEY (`Subject_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE IF NOT EXISTS `subject` (
+    `Subject_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Subject_Name` VARCHAR(100) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 INSERT INTO `subject` (`Subject_ID`, `Subject_Name`)
 VALUES (1, 'Physics'),
     (2, 'Computer Science'),
@@ -46,32 +44,31 @@ VALUES (1, 'Physics'),
     (4, 'Literature'),
     (5, 'Fine Arts');
 -- Table: books
-CREATE TABLE `books` (
-    `Book_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Book_Title` varchar(200) NOT NULL,
-    `Subject_ID` int(11) DEFAULT NULL,
-    `Publisher_ID` int(11) DEFAULT NULL,
-    `Category_ID` int(11) DEFAULT NULL,
-    `Purchase_Date` date DEFAULT NULL,
-    `Available_Status` enum('Available', 'Issued', 'Lost') DEFAULT 'Available',
-    `Total_Copies` int(11) DEFAULT 0,
-    `Available_Copies` int(11) DEFAULT 0,
-    PRIMARY KEY (`Book_ID`),
+CREATE TABLE IF NOT EXISTS `books` (
+    `Book_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Book_Title` VARCHAR(200) NOT NULL,
+    `Subject_ID` INT NOT NULL,
+    `Publisher_ID` INT NOT NULL,
+    `Category_ID` INT NOT NULL,
+    `Purchase_Date` DATE DEFAULT NULL,
+    `Available_Status` ENUM('Available', 'Issued', 'Lost') DEFAULT 'Available',
+    `Total_Copies` INT DEFAULT 0,
+    `Available_Copies` INT DEFAULT 0,
     FOREIGN KEY (`Subject_ID`) REFERENCES `subject`(`Subject_ID`),
     FOREIGN KEY (`Publisher_ID`) REFERENCES `publisher`(`Publisher_ID`),
     FOREIGN KEY (`Category_ID`) REFERENCES `category`(`Category_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 -- Insert books (no trailing comma after last value!)
-INSERT INTO books (
-        Book_ID,
-        Book_Title,
-        Subject_ID,
-        Publisher_ID,
-        Category_ID,
-        Purchase_Date,
-        Available_Status,
-        Total_Copies,
-        Available_Copies
+INSERT INTO `books` (
+        `Book_ID`,
+        `Book_Title`,
+        `Subject_ID`,
+        `Publisher_ID`,
+        `Category_ID`,
+        `Purchase_Date`,
+        `Available_Status`,
+        `Total_Copies`,
+        `Available_Copies`
     )
 VALUES (
         1,
@@ -93,7 +90,7 @@ VALUES (
         '2021-09-10',
         'Issued',
         5,
-        0
+        2
     ),
     (
         3,
@@ -114,7 +111,7 @@ VALUES (
         2,
         '2020-07-11',
         'Lost',
-        0,
+        8,
         0
     ),
     (
@@ -169,7 +166,7 @@ VALUES (
         3,
         '2020-05-17',
         'Lost',
-        0,
+        5,
         0
     ),
     (
@@ -203,7 +200,7 @@ VALUES (
         '2021-06-19',
         'Issued',
         6,
-        0
+        2
     ),
     (
         13,
@@ -235,7 +232,7 @@ VALUES (
         4,
         '2021-11-05',
         'Lost',
-        0,
+        2,
         0
     ),
     (
@@ -269,7 +266,7 @@ VALUES (
         '2021-08-08',
         'Issued',
         6,
-        0
+        2
     ),
     (
         19,
@@ -279,7 +276,7 @@ VALUES (
         1,
         '2020-09-15',
         'Lost',
-        0,
+        3,
         0
     ),
     (
@@ -324,7 +321,7 @@ VALUES (
         '2021-05-09',
         'Issued',
         8,
-        0
+        4
     ),
     (
         24,
@@ -334,7 +331,7 @@ VALUES (
         5,
         '2020-03-22',
         'Lost',
-        0,
+        3,
         0
     ),
     (
@@ -357,6 +354,14 @@ CREATE TABLE `member` (
     `Books_Issued_Count` int(11) DEFAULT 0,
     PRIMARY KEY (`Member_ID`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+-- Table: member
+CREATE TABLE IF NOT EXISTS `member` (
+    `Member_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Member_Name` VARCHAR(100) NOT NULL,
+    `Member_Contact` VARCHAR(100),
+    `Status` ENUM('Active', 'Inactive') DEFAULT 'Active',
+    `Books_Issued_Count` INT DEFAULT 0
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 INSERT INTO `member` (
         `Member_ID`,
         `Member_Name`,
@@ -373,81 +378,86 @@ VALUES (101, 'ALLEN', '9898989898', 'Active', 12),
     (107, 'ELICE', '4567112397', 'Inactive', 8),
     (108, 'FINN', '9898007654', 'Active', 5),
     (109, 'GRACE', '7894561230', 'Active', 6);
--- Table: accounts
-CREATE TABLE `accounts` (
-    `Account_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Member_ID` int(11) DEFAULT NULL,
-    `Payment_Description` text DEFAULT NULL,
-    `Payment_Amount` decimal(10, 2) DEFAULT NULL,
-    `Payment_Date` date DEFAULT NULL,
-    PRIMARY KEY (`Account_ID`),
-    FOREIGN KEY (`Member_ID`) REFERENCES `member`(`Member_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-INSERT INTO `accounts` (
-        `Account_ID`,
+-- Table: reviews
+CREATE TABLE IF NOT EXISTS `reviews` (
+    `Review_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Book_ID` INT NOT NULL,
+    `Member_ID` INT NOT NULL,
+    `Rating` INT CHECK (
+        Rating BETWEEN 1 AND 5
+    ),
+    `Comment` TEXT,
+    `Review_Date` DATE,
+    FOREIGN KEY (`Book_ID`) REFERENCES `books`(`Book_ID`) ON DELETE CASCADE,
+    FOREIGN KEY (`Member_ID`) REFERENCES `member`(`Member_ID`) ON DELETE CASCADE
+);
+INSERT INTO `reviews` (
+        `Book_ID`,
         `Member_ID`,
-        `Payment_Description`,
-        `Payment_Amount`,
-        `Payment_Date`
+        `Rating`,
+        `Comment`,
+        `Review_Date`
     )
 VALUES (
         1,
         101,
-        'Late fee for overdue book',
-        15.00,
-        '2025-03-15'
+        5,
+        'Excellent explanation and examples.',
+        '2024-12-01'
     ),
     (
         2,
-        102,
-        'Membership renewal',
-        50.00,
-        '2025-01-10'
+        103,
+        4,
+        'Helpful but a bit outdated.',
+        '2024-12-10'
     ),
-    (3, 103, 'Lost book fine', 120.00, '2025-02-20'),
-    (4, 105, 'Damage charge', 30.00, '2025-04-01'),
-    (5, 108, 'Late return fine', 10.00, '2025-03-25'),
     (
         6,
-        109,
-        'Membership renewal',
-        50.00,
-        '2025-02-01'
-    ),
+        105,
+        5,
+        'Must-read for CS students.',
+        '2025-01-15'
+    );
+-- Table: accounts
+CREATE TABLE IF NOT EXISTS `accounts` (
+    `Account_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Member_ID` INT NOT NULL,
+    `Book_ID` INT NOT NULL,
+    `Issue_Date` DATE,
+    `Return_Date` DATE,
+    `Status` ENUM('Issued', 'Returned', 'Overdue'),
+    `Fine` DECIMAL(5, 2) DEFAULT 0,
+    FOREIGN KEY (`Member_ID`) REFERENCES `member`(`Member_ID`) ON DELETE CASCADE,
+    FOREIGN KEY (`Book_ID`) REFERENCES `books`(`Book_ID`) ON DELETE CASCADE
+);
+INSERT INTO `accounts` (
+        `Member_ID`,
+        `Book_ID`,
+        `Issue_Date`,
+        `Return_Date`,
+        `Status`,
+        `Fine`
+    )
+VALUES (101, 2, '2025-01-05', NULL, 'Issued', 0.00),
     (
+        102,
         7,
-        106,
-        'Late fee for overdue book',
-        20.00,
-        '2025-03-05'
+        '2025-01-12',
+        '2025-02-01',
+        'Returned',
+        0.00
     ),
-    (
-        8,
-        107,
-        'Lost book replacement',
-        150.00,
-        '2025-02-15'
-    ),
-    (
-        9,
-        104,
-        'Membership cancellation refund',
-        -20.00,
-        '2025-01-30'
-    ),
-    (10, 103, 'Fine adjustment', -10.00, '2025-04-10');
+    (103, 9, '2025-01-15', NULL, 'Overdue', 50.00);
 -- Table: book_demand
-CREATE TABLE `book_demand` (
-    `Demand_ID` int(11) NOT NULL AUTO_INCREMENT,
-    `Book_ID` int(11) DEFAULT NULL,
-    `Demand_Count` int(11) DEFAULT 0,
-    `Last_Updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (`Demand_ID`),
-    FOREIGN KEY (`Book_ID`) REFERENCES `books`(`Book_ID`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-INSERT INTO book_demand (Book_ID, Demand_Count, Last_Updated)
-VALUES (1, 12, '2025-04-25'),
-    (2, 5, '2025-04-26'),
-    (3, 9, '2025-04-27'),
-    (4, 20, '2025-04-28'),
-    (5, 0, '2025-04-20');
+CREATE TABLE IF NOT EXISTS `book_demand` (
+    `Demand_ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Book_ID` INT NOT NULL,
+    `Demand_Count` INT DEFAULT 0,
+    `Last_Updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`Book_ID`) REFERENCES `books`(`Book_ID`) ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+INSERT INTO `book_demand` (`Book_ID`, `Demand_Count`)
+VALUES (2, 15),
+    (6, 22),
+    (10, 18);
